@@ -13,8 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
         android:paddingStart="4dp"
+        android:paddingTop="4dp"
         android:paddingEnd="52dp">
 
         <TextView
@@ -36,39 +36,37 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="28dp"
-        android:paddingTop="24dp"
         android:orientation="vertical"
-        >
-
-    <Button
-        android:id="@+id/Search_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        tools:ignore="NestedWeights,VisualLintButtonSize"
-
-        android:backgroundTint="@color/white"
-        android:gravity="center"
-
-        android:textAllCaps="false"
-        android:text="@string/search"
-        android:textColor="@color/black"
-
-        app:icon="@drawable/search"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
-        app:iconTint="@color/black"
-
-        app:cornerRadius="16dp"
-        >
-
-    </Button>
+        android:paddingHorizontal="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="28dp">
 
         <Button
-            android:id="@+id/Library_button"
+            android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+
+            android:gravity="center"
+            android:text="@string/search"
+
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:cornerRadius="@dimen/Main_buttons_rounding"
+
+            app:icon="@drawable/search"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/Main_icon_padding"
+            app:iconTint="@color/black"
+
+            tools:ignore="NestedWeights,VisualLintButtonSize">
+
+        </Button>
+
+        <Button
+            android:id="@+id/library_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -77,22 +75,22 @@
             android:backgroundTint="@color/white"
             android:gravity="center"
 
-            android:textAllCaps="false"
             android:text="@string/library"
+            android:textAllCaps="false"
             android:textColor="@color/black"
 
+            app:cornerRadius="@dimen/Main_buttons_rounding"
             app:icon="@drawable/library"
             app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="@color/black"
+            app:iconPadding="@dimen/Main_icon_padding"
 
-            app:cornerRadius="16dp"
+            app:iconTint="@color/black"
             tools:ignore="VisualLintButtonSize">
 
         </Button>
 
         <Button
-            android:id="@+id/Settings_button"
+            android:id="@+id/settings_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -101,22 +99,21 @@
             android:backgroundTint="@color/white"
             android:gravity="center"
 
-            android:textAllCaps="false"
             android:text="@string/settings"
+            android:textAllCaps="false"
             android:textColor="@color/black"
 
+            app:cornerRadius="@dimen/Main_buttons_rounding"
             app:icon="@drawable/settings"
             app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="@color/black"
+            app:iconPadding="@dimen/Main_icon_padding"
 
-            app:cornerRadius="16dp"
+            app:iconTint="@color/black"
             tools:ignore="VisualLintButtonSize">
 
         </Button>
 
     </LinearLayout>
-
 
 
 </LinearLayout>

@@ -10,30 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="48dp"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/Back_button"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:importantForAccessibility="no"
             android:padding="12dp"
             android:src="@drawable/arrow_back"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:importantForAccessibility="no" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingStart="12dp"
-            android:paddingTop="10dp"
+            android:paddingTop="8dp"
             android:paddingEnd="86dp"
             android:paddingBottom="12dp"
             android:text="@string/settings"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
@@ -54,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="21dp"
+                android:layout_marginVertical="20dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="44dp"
                 android:text="@string/settings_darkmode"
@@ -68,8 +67,8 @@
             android:layout_gravity="center"
             android:background="@color/white"
             android:importantForAccessibility="no"
-            android:paddingVertical="11dp"
-            android:paddingStart="9dp"
+            android:paddingVertical="12dp"
+            android:paddingStart="8dp"
             android:paddingEnd="12dp"
             android:src="@drawable/off"
             tools:ignore="ImageContrastCheck" />
@@ -80,18 +79,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp">
+        android:paddingStart="@dimen/Settings_list_padding_start"
+        android:paddingTop="@dimen/Settings_list_padding_top"
+        android:paddingEnd="@dimen/Settings_list_padding_end"
+        android:paddingBottom="@dimen/Settings_list_padding_bottom">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/settings_share"
-            android:textColor="@color/screen2_font_black"
-            android:layout_marginEnd="8dp"/>
+            android:textColor="@color/screen2_font_black" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -111,18 +110,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp">
+        android:paddingStart="@dimen/Settings_list_padding_start"
+        android:paddingTop="@dimen/Settings_list_padding_top"
+        android:paddingEnd="@dimen/Settings_list_padding_end"
+        android:paddingBottom="@dimen/Settings_list_padding_bottom">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/settings_support"
-            android:textColor="@color/screen2_font_black"
-            android:layout_marginEnd="8dp"/>
+            android:textColor="@color/screen2_font_black" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -142,18 +141,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp">
+        android:paddingStart="@dimen/Settings_list_padding_start"
+        android:paddingTop="@dimen/Settings_list_padding_top"
+        android:paddingEnd="@dimen/Settings_list_padding_end"
+        android:paddingBottom="@dimen/Settings_list_padding_bottom">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/settings_EULA"
-            android:textColor="@color/screen2_font_black"
-            android:layout_marginEnd="8dp"/>
+            android:textColor="@color/screen2_font_black" />
 
         <ImageButton
             android:layout_width="wrap_content"
