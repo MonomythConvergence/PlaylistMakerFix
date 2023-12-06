@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginEnd="48dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/icon_bg"
+            android:importantForAccessibility="no"
+            android:padding="12dp"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/settings_button"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/ys_display_medium"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="132dp"
+            android:paddingBottom="12dp"
+            android:text="@string/search"
+            android:textColor="@color/settings_font"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+    <!-- Search bar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded"
+        android:layout_gravity="center_vertical"
+        >
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/search_bar_bg"
+            android:importantForAccessibility="no"
+            android:src="@drawable/search"
+            app:tint="@color/search_bar_elements"
+            tools:ignore="ImageContrastCheck" />
+
+        <EditText
+            android:id="@+id/searchBarField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/search"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@color/blue"
+            app:tint="@color/search_bar_elements"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize"
+            android:importantForAutofill="no" />
+
+        <ImageButton
+            android:id="@+id/searchBarClear"
+            android:layout_margin="12dp"
+            android:src="@drawable/cancel"
+            android:inputType="text"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:importantForAccessibility="no" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
