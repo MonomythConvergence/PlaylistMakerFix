@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 pluginManagement {
     repositories {
         google()
@@ -15,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Playlist Maker"
+rootProject.name = "PlaylistMaker"
 include(":app")
