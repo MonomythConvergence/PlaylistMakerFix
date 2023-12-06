@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_screen_bg">#1A1B22</color>
+    <color name="icon_bg">#1A1B22</color>
+    <color name="settings_font">#FFFFFFFF</color>
+    <color name="settings_button">#FFFFFFFF</color>
+    <color name="search_bar_elements">#1A1B22</color>
+
+
+
+</resources>
