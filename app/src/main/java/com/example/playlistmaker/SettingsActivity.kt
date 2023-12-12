@@ -40,13 +40,14 @@ class SettingsActivity : AppCompatActivity() {
 
 
 
-            val sendIntent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, getString(R.string.email_recipient))
-                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
-                putExtra(Intent.EXTRA_TEXT, getString(R.string.email_subject))
-            }
-            startActivity(sendIntent)
+            val sendIntent = Intent(Intent.ACTION_SENDTO)
+                sendIntent.data = Uri.parse("mailto:")
+                sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.email_recipient)))
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_message))
+                startActivity(sendIntent)
+
+
     }
         val EULAButton = findViewById<ImageButton>(R.id.EULA_button)
 

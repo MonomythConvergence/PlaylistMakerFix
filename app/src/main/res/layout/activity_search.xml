@@ -41,7 +41,7 @@
     </LinearLayout>
     <!-- Search bar -->
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -53,48 +53,41 @@
         android:layout_gravity="center_vertical"
         >
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="@color/search_bar_bg"
-            android:importantForAccessibility="no"
-            android:src="@drawable/search"
-            app:tint="@color/search_bar_elements"
-            tools:ignore="ImageContrastCheck" />
-
         <EditText
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="@dimen/Main_icon_padding"
+            android:drawableTint="@color/search_bar_elements"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:id="@+id/searchBarField"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:hint="@string/search"
             android:maxLines="1"
             android:textColor="@color/black"
+            android:textColorHint="@color/search_bar_elements"
             android:textCursorDrawable="@color/blue"
             app:tint="@color/search_bar_elements"
-            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize"
+            tools:ignore="DuplicateSpeakableTextCheck,RtlSymmetry,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize"
             android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/searchBarClear"
-            android:layout_margin="12dp"
+
+            android:padding="12dp"
             android:src="@drawable/cancel"
             android:inputType="text"
-            android:layout_gravity="center_vertical"
+            app:tint="@color/search_bar_elements"
+            android:layout_gravity="center_vertical|end"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:importantForAccessibility="no" />
 
-    </LinearLayout>
-
+    </FrameLayout>
 
 </LinearLayout>

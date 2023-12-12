@@ -5,7 +5,6 @@
     <color name="settings_font">#FFFFFFFF</color>
     <color name="settings_button">#FFFFFFFF</color>
     <color name="search_bar_elements">#1A1B22</color>
-
-
+    <color name="search_bar_bg">#FFFFFF</color>
 
 </resources>
