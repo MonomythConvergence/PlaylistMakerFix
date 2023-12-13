@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,11 +18,12 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/icon_bg"
             android:importantForAccessibility="no"
             android:padding="12dp"
             android:src="@drawable/arrow_back"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            app:tint="@color/settings_button" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +34,9 @@
             android:paddingEnd="86dp"
             android:paddingBottom="12dp"
             android:text="@string/settings"
-            android:textColor="@color/black" />
+            android:fontFamily="@font/ys_display_medium"
+            android:textSize="22sp"
+            android:textColor="@color/settings_font" />
 
     </LinearLayout>
 
@@ -51,118 +55,73 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="44dp"
+                style="@style/SettingsDarkThemeText"
                 android:text="@string/settings_darkmode"
-                android:textColor="@color/screen2_font_black" />
+                />
 
         </LinearLayout>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:importantForAccessibility="no"
-            android:paddingVertical="12dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="12dp"
+        <Switch
+            style="@style/SettingsDarkThemeToggle"
             android:src="@drawable/off"
-            tools:ignore="ImageContrastCheck" />
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
 
     </LinearLayout>
     <!-- Share -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/Settings_list_padding_start"
-        android:paddingTop="@dimen/Settings_list_padding_top"
-        android:paddingEnd="@dimen/Settings_list_padding_end"
-        android:paddingBottom="@dimen/Settings_list_padding_bottom">
+        style="@style/SettingsOptionsLL">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            style="@style/SettingsOptionsText"
             android:text="@string/settings_share"
-            android:textColor="@color/screen2_font_black" />
+            />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:background="@color/white"
-            android:importantForAccessibility="no"
+            android:id="@+id/settings_share_button"
+            style="@style/SettingsOptionsIcon"
             android:src="@drawable/share"
-            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 
     <!--Contact -->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/Settings_list_padding_start"
-        android:paddingTop="@dimen/Settings_list_padding_top"
-        android:paddingEnd="@dimen/Settings_list_padding_end"
-        android:paddingBottom="@dimen/Settings_list_padding_bottom">
+        style="@style/SettingsOptionsLL">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            style="@style/SettingsOptionsText"
             android:text="@string/settings_support"
-            android:textColor="@color/screen2_font_black" />
+
+            />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:background="@color/white"
-            android:importantForAccessibility="no"
+            android:id="@+id/settings_support_button"
+            style="@style/SettingsOptionsIcon"
             android:src="@drawable/support"
-            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 
     <!--EULA -->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/Settings_list_padding_start"
-        android:paddingTop="@dimen/Settings_list_padding_top"
-        android:paddingEnd="@dimen/Settings_list_padding_end"
-        android:paddingBottom="@dimen/Settings_list_padding_bottom">
+        style="@style/SettingsOptionsLL">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            style="@style/SettingsOptionsText"
             android:text="@string/settings_EULA"
-            android:textColor="@color/screen2_font_black" />
+
+            />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:background="@color/white"
-            android:importantForAccessibility="no"
+            android:id="@+id/EULA_button"
+            style="@style/SettingsOptionsIcon"
             android:src="@drawable/expand"
-            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+            tools:ignore="ImageContrastCheck,TouchTargetSizeCheck"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 </LinearLayout>

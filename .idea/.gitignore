@@ -26,3 +26,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Resources
+*.tff
