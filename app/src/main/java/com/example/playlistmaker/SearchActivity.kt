@@ -1,7 +1,6 @@
 package com.example.playlistmaker
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,10 +8,15 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
 
     private var userInputReserve = ""
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: SearchAdapter
 
     companion object {
         const val USER_INPUT = "userInput"
@@ -32,6 +36,11 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        recyclerView = findViewById(R.id.search_recycler)
+        adapter = SearchAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
         val searchBarField = findViewById<EditText>(R.id.searchBarField)
         val searchBarClear = findViewById<ImageButton>(R.id.searchBarClear)
 
@@ -42,7 +51,6 @@ class SearchActivity : AppCompatActivity() {
         searchBarField.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Заглушка
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

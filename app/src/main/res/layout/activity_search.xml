@@ -39,55 +39,64 @@
             android:textSize="22sp" />
 
     </LinearLayout>
+
     <!-- Search bar -->
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
         android:background="@drawable/rounded"
-        android:layout_gravity="center_vertical"
-        >
+        android:orientation="horizontal">
 
         <EditText
-            android:drawableStart="@drawable/search"
-            android:drawablePadding="@dimen/Main_icon_padding"
-            android:drawableTint="@color/search_bar_elements"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:id="@+id/searchBarField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="@dimen/Main_icon_padding"
+            android:drawableTint="@color/search_bar_elements"
             android:hint="@string/search"
+            android:importantForAutofill="no"
             android:maxLines="1"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/search_bar_elements"
             android:textCursorDrawable="@color/blue"
             app:tint="@color/search_bar_elements"
-            tools:ignore="DuplicateSpeakableTextCheck,RtlSymmetry,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize"
-            android:importantForAutofill="no" />
+            tools:ignore="DuplicateSpeakableTextCheck,RtlSymmetry,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <ImageButton
             android:id="@+id/searchBarClear"
 
-            android:padding="12dp"
-            android:src="@drawable/cancel"
-            android:inputType="text"
-            app:tint="@color/search_bar_elements"
-            android:layout_gravity="center_vertical|end"
-            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:background="@android:color/transparent"
+            android:importantForAccessibility="no"
+            android:inputType="text"
+            android:padding="12dp"
+            android:src="@drawable/cancel"
             android:visibility="invisible"
-            android:importantForAccessibility="no" />
+            app:tint="@color/search_bar_elements" />
 
     </FrameLayout>
 
+
+    <!-- Results -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 </LinearLayout>
+
