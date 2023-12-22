@@ -57,7 +57,7 @@
                 android:src="@drawable/ic"
                 app:tint="@color/search_item_etc"
                 tools:ignore="ContentDescription,ImageContrastCheck" />
-
+            
             <TextView
                 android:id="@+id/track_time"
                 android:layout_width="wrap_content"
