@@ -67,4 +67,12 @@
         <item name="android:importantForAccessibility">no</item>
     </style>
 
+    <style name="SearchItemSubtext">
+        <item name="android:fontFamily">@font/ys_text_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/search_item_etc</item>
+    </style>
+
 </resources>

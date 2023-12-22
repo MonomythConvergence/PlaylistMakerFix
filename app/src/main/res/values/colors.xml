@@ -7,6 +7,8 @@
     <color name="settings_button">#1A1B22</color>
     <color name="search_bar_elements">#AEAFB4</color>
     <color name="search_bar_bg">#E6E8EB</color>
+    <color name="search_item_title">#000000</color>
+    <color name="search_item_etc">#AEAFB4</color>
 
     <color name="black">#1A1B22</color>
     <color name="white">#FFFFFFFF</color>
