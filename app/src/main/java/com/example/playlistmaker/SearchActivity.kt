@@ -19,7 +19,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var adapter: SearchAdapter
 
     companion object {
-        const val USER_INPUT = "userInput"
+        private const val USER_INPUT = "userInput"
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

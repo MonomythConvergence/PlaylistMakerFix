@@ -3,6 +3,7 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -25,6 +26,7 @@
         android:orientation="vertical">
 
         <TextView
+            tools:text="Track Name"
             android:id="@+id/track_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,12 +46,9 @@
                 android:id="@+id/artist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ys_text_regular"
-                android:textSize="11sp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/search_item_etc"
-                />
+                style="@style/SearchItemSubtext"
+                tools:ignore="TextContrastCheck"
+                tools:text="Artist Name" />
 
             <ImageView
                 android:layout_width="13dp"
@@ -63,11 +62,9 @@
                 android:id="@+id/track_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ys_text_regular"
-                android:textSize="11sp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/search_item_etc"/>
+                style="@style/SearchItemSubtext"
+                tools:ignore="TextContrastCheck"
+                tools:text="Track Length" />
 
         </LinearLayout>
     </LinearLayout>
