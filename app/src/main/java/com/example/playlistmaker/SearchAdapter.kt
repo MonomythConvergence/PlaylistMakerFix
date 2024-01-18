@@ -38,7 +38,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
             Glide.with(artworkImageView)
                 .load(track.artworkUrl100)
                 .placeholder(R.drawable.placeholder)
-                .transform(CenterCrop(), RoundedCorners(10)).into(artworkImageView)
+                .transform(CenterCrop(), RoundedCorners(R.dimen.Track_icon_rounding)).into(artworkImageView)
         }
     }
 }

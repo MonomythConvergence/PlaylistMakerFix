@@ -63,15 +63,17 @@
             android:drawablePadding="@dimen/Main_icon_padding"
             android:drawableTint="@color/search_bar_elements"
             android:hint="@string/search"
+            android:imeOptions="actionDone"
             android:importantForAutofill="no"
-            android:maxLines="1"
             android:paddingStart="12dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/search_bar_elements"
             android:textCursorDrawable="@color/blue"
             app:tint="@color/search_bar_elements"
+
             tools:ignore="DuplicateSpeakableTextCheck,RtlSymmetry,TextContrastCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <ImageButton
@@ -90,13 +92,80 @@
 
     </FrameLayout>
 
-
     <!-- Results -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_recycler"
+        android:id="@+id/searchRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:visibility="visible" />
 
+    <!-- No connection -->
+    <LinearLayout
+        android:id="@+id/noConnectionError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/compound_no_internet"
+            android:paddingTop="102dp"
+            android:paddingHorizontal="120dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ys_text_medium"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:text="@string/connection_error"
+            android:textColor="@color/settings_font"
+            android:textSize="19sp" />
+
+        <Button
+
+            android:id="@+id/searchRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/search_refresh_bg"
+
+            android:fontFamily="@font/ys_text_medium"
+            android:paddingTop="8dp"
+            android:text="@string/search_refresh"
+            android:textColor="@color/search_refresh_text"
+            android:textSize="14sp"
+            app:cornerRadius="@dimen/Search_bar_rounding"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <!-- No results -->
+    <LinearLayout
+        android:id="@+id/noResultsError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/compound_no_results"
+            android:paddingTop="102dp"
+            android:paddingHorizontal="120dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ys_text_medium"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:text="@string/no_results"
+            android:textColor="@color/settings_font"
+            android:textSize="19sp" />
+
+    </LinearLayout>
 </LinearLayout>
-

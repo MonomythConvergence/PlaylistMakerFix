@@ -3,10 +3,14 @@
     <color name="main_screen_bg">#1A1B22</color>
     <color name="icon_bg">#1A1B22</color>
     <color name="settings_font">#FFFFFFFF</color>
-    <color name="settings_button">#FFFFFFFF</color>
+    <color name="settings_button">#FFFFFF</color>
     <color name="search_bar_elements">#1A1B22</color>
     <color name="search_bar_bg">#FFFFFF</color>
     <color name="search_item_title">#FFFFFF</color>
     <color name="search_item_etc">#FFFFFF</color>
+    <color name="search_refresh_text">#1A1B22</color>
+    <color name="search_refresh_bg">#FFFFFF</color>
+    <color name="search_note">#FFFFFF</color>
+
 
 </resources>
