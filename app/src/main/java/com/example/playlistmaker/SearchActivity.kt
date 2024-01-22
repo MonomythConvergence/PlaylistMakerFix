@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -67,6 +68,14 @@ class SearchActivity : AppCompatActivity() {
         }
 
         fun handleSearch() {
+
+            fun setLayoutVisibility(searchRecycler: View, noConnectionError: View, noResultsError: View, isSearchVisible: Boolean, isNoConnectionErrorVisible: Boolean, isNoResultsErrorVisible: Boolean) {
+                searchRecycler.visibility = if (isSearchVisible) View.VISIBLE else View.GONE
+                noConnectionError.visibility = if (isNoConnectionErrorVisible) View.VISIBLE else View.GONE
+                noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE
+            }
+
+
             val gson = Gson()
 
             val rawQuery = searchBarField.text.toString()
@@ -92,92 +101,70 @@ class SearchActivity : AppCompatActivity() {
                                 )
                                 val searchResults = parsedResponse?.results
                                 if (searchResults != null) {
-                                    if (parsedResponse.resultCount==0){
+                                    if (parsedResponse.resultCount == 0) {
                                         Log.d(
                                             "MyTag",
                                             "0 results. Display noResultsError"
                                         )
-                                        searchRecycler.visibility = View.GONE
-                                        noConnectionError.visibility = View.GONE
-                                        noResultsError.visibility = View.VISIBLE
-                                    }
-                                    else{
-                                    for (result in searchResults) {
-                                        Track.trackList.add(
-                                            Track(
-                                                result.trackName,
-                                                result.artistName,
-                                                SimpleDateFormat(
-                                                    "mm:ss",
-                                                    Locale.getDefault()
-                                                ).format(
-                                                    result.trackTimeMillis
-                                                ),
-                                                result.artworkUrl100
+                                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
+                                    } else {
+                                        for (result in searchResults) {
+                                            Track.trackList.add(
+                                                Track(
+                                                    result.trackName,
+                                                    result.artistName,
+                                                    SimpleDateFormat(
+                                                        "mm:ss",
+                                                        Locale.getDefault()
+                                                    ).format(
+                                                        result.trackTimeMillis
+                                                    ),
+                                                    result.artworkUrl100
+                                                )
                                             )
-                                        )
+                                        }
+                                        Log.d("MyTag", "New tracklist filled. Display results")
+                                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, true, false, false)
                                     }
-                                    Log.d("MyTag", "New tracklist filled. Display results")
-                                    searchRecycler.visibility = View.VISIBLE
-                                    noConnectionError.visibility = View.GONE
-                                    noResultsError.visibility = View.GONE}
                                 } else {
                                     Log.d(
                                         "MyTag",
                                         "IF4 else. Display noResultsError, " +
                                                 "but it's just a safety measure against null"
                                     )
-                                    searchRecycler.visibility = View.GONE
-                                    noConnectionError.visibility = View.GONE
-                                    noResultsError.visibility = View.VISIBLE
+                                    setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
                                 }
                             } else {
                                 Log.d("MyTag", "IF3 else. Null results. Display noResultsError")
-                                searchRecycler.visibility = View.GONE
-                                noConnectionError.visibility = View.GONE
-                                noResultsError.visibility = View.VISIBLE
+                                setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
                             }
                             adapter.notifyDataSetChanged()
                         } else {
                             Log.d("MyTag", "IF2 else. Code!=200. Display noConnectionError")
-                            searchRecycler.visibility = View.GONE
-                            noConnectionError.visibility = View.VISIBLE
-                            noResultsError.visibility = View.GONE
+                            setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
                         }
                     } else {
                         Log.d("MyTag", "IF1 else. Unsuccessful response. Display noConnectionError")
-                        searchRecycler.visibility = View.GONE
-                        noConnectionError.visibility = View.VISIBLE
-                        noResultsError.visibility = View.GONE
+                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
                     }
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     Log.d("MyTag", "onFailure. Display noConnectionError")
-                    searchRecycler.visibility = View.GONE
-                    noConnectionError.visibility = View.VISIBLE
-                    noResultsError.visibility = View.GONE
+                    setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
                 }
             })
         }
 
-        searchBarField.addTextChangedListener(object : TextWatcher {
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        searchBarField.doOnTextChanged { text, start, before, count ->
+            if (text?.isNotEmpty() == true) {
+                searchBarClear.visibility = View.VISIBLE
+            } else {
+                searchBarClear.visibility = View.INVISIBLE
             }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s?.isNotEmpty() == true) {
-                    searchBarClear.visibility = View.VISIBLE
-                } else {
-                    searchBarClear.visibility = View.INVISIBLE
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                userInputReserve = s.toString()
-            }
-        })
+            userInputReserve = text.toString()
+        }
 
         searchBarClear.setOnClickListener {
             searchBarField.text.clear()
@@ -208,4 +195,5 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-}
+
+    }
