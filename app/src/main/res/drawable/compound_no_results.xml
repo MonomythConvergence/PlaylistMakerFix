@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/note_a"
+        android:top="3dp"
+        android:end="9dp"
+        android:start="9dp"
+        android:bottom="23dp"/>
+    <item
+        android:drawable="@drawable/no_results"
+        android:top="28dp"
+        android:end="14dp"
+        android:start="37dp"
+        android:bottom="23dp" />
+    <item
+        android:drawable="@drawable/note_b"
+        android:top="3dp"
+        android:end="9dp"
+        android:start="80dp"
+        android:bottom="4dp"/>
+</layer-list>
