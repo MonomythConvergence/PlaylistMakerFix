@@ -3,8 +3,6 @@ package com.example.playlistmaker
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -28,8 +26,10 @@ import java.util.Locale
 class SearchActivity : AppCompatActivity() {
 
     private var userInputReserve = ""
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: SearchAdapter
+    private lateinit var recyclerResultsView: RecyclerView
+    private lateinit var recyclerRecentView: RecyclerView
+    private lateinit var searchAdapter: SearchAdapter
+    private lateinit var recentAdapter: SearchAdapter
 
 
     companion object {
@@ -51,31 +51,68 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        recyclerView = findViewById(R.id.searchRecycler)
-        adapter = SearchAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerResultsView = findViewById(R.id.searchResultsRecycler)
+        searchAdapter = SearchAdapter(Track.trackList)
+        recyclerResultsView.adapter = searchAdapter
+        recyclerResultsView.layoutManager = LinearLayoutManager(this)
+
+        recyclerRecentView = findViewById(R.id.recentRecycler)
+        recentAdapter = SearchAdapter(SearchHistory.recentTracksList)
+        recyclerRecentView.adapter = recentAdapter
+        recyclerRecentView.layoutManager = LinearLayoutManager(this)
 
         val searchBarField = findViewById<EditText>(R.id.searchBarField)
         val searchBarClear = findViewById<ImageButton>(R.id.searchBarClear)
         val searchRefresh = findViewById<Button>(R.id.searchRefresh)
         val noConnectionError = findViewById<LinearLayout>(R.id.noConnectionError)
         val noResultsError = findViewById<LinearLayout>(R.id.noResultsError)
-        val searchRecycler = findViewById<RecyclerView>(R.id.searchRecycler)
+
+
+        val recentSearchFrame = findViewById<LinearLayout>(R.id.recentSearchFrame)
+        val clearSearchHistory = findViewById<Button>(R.id.clearSearchHistory)
+
 
         if (savedInstanceState != null) {
             searchBarField.setText(userInputReserve)
         }
 
-        fun handleSearch() {
+        fun setLayoutVisibility(
+            recentSearchFrame: View,
+            searchRecycler: View,
+            noConnectionError: View,
+            noResultsError: View,
+            isSearchHistoryVisible: Boolean,
+            isSearchVisible: Boolean,
+            isNoConnectionErrorVisible: Boolean,
+            isNoResultsErrorVisible: Boolean
+        ) {
+            recentSearchFrame.visibility = if (isSearchHistoryVisible) View.VISIBLE else View.GONE
+            searchRecycler.visibility = if (isSearchVisible) View.VISIBLE else View.GONE
+            noConnectionError.visibility =
+                if (isNoConnectionErrorVisible) View.VISIBLE else View.GONE
+            noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE}
 
-            fun setLayoutVisibility(searchRecycler: View, noConnectionError: View, noResultsError: View, isSearchVisible: Boolean, isNoConnectionErrorVisible: Boolean, isNoResultsErrorVisible: Boolean) {
-                searchRecycler.visibility = if (isSearchVisible) View.VISIBLE else View.GONE
-                noConnectionError.visibility = if (isNoConnectionErrorVisible) View.VISIBLE else View.GONE
-                noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE
+
+        searchBarField.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus && searchBarField.text.isEmpty() && SearchHistory.recentTracksList.isNotEmpty()) {
+                SearchHistory(App.recentTracksSharedPreferences).decodeAndLoad()
+                setLayoutVisibility(
+                    recentSearchFrame,
+                    recyclerResultsView,
+                    noConnectionError,
+                    noResultsError,
+                    true,
+                    false,
+                    false,
+                    false
+                )
+
             }
 
+        }
 
+
+        fun handleSearch() {
             val gson = Gson()
 
             val rawQuery = searchBarField.text.toString()
@@ -84,8 +121,6 @@ class SearchActivity : AppCompatActivity() {
             val apiClient = ApiClient()
             val call = apiClient.apiService.searchQuery(rawQuery, entity)
 
-
-
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(
                     call: Call<JsonObject>,
@@ -93,7 +128,9 @@ class SearchActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
+
                             Track.trackList.clear()
+
                             if (response.body() != null) {
                                 val parsedResponse = gson.fromJson(
                                     response.body(),
@@ -101,14 +138,25 @@ class SearchActivity : AppCompatActivity() {
                                 )
                                 val searchResults = parsedResponse?.results
                                 if (searchResults != null) {
+
                                     if (parsedResponse.resultCount == 0) {
                                         Log.d(
                                             "MyTag",
                                             "0 results. Display noResultsError"
                                         )
-                                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
+                                        setLayoutVisibility(
+                                            recentSearchFrame,
+                                            recyclerResultsView,
+                                            noConnectionError,
+                                            noResultsError,
+                                            false,
+                                            false,
+                                            false,
+                                            true
+                                        )
                                     } else {
                                         for (result in searchResults) {
+
                                             Track.trackList.add(
                                                 Track(
                                                     result.trackName,
@@ -119,12 +167,25 @@ class SearchActivity : AppCompatActivity() {
                                                     ).format(
                                                         result.trackTimeMillis
                                                     ),
-                                                    result.artworkUrl100
+                                                    result.artworkUrl100,
+                                                    result.trackId
                                                 )
                                             )
+
                                         }
                                         Log.d("MyTag", "New tracklist filled. Display results")
-                                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, true, false, false)
+                                        setLayoutVisibility(
+                                            recentSearchFrame,
+                                            recyclerResultsView,
+                                            noConnectionError,
+                                            noResultsError,
+                                            false,
+                                            true,
+                                            false,
+                                            false
+                                        )
+                                        searchAdapter.notifyDataSetChanged()
+
                                     }
                                 } else {
                                     Log.d(
@@ -132,30 +193,90 @@ class SearchActivity : AppCompatActivity() {
                                         "IF4 else. Display noResultsError, " +
                                                 "but it's just a safety measure against null"
                                     )
-                                    setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
+                                    setLayoutVisibility(
+                                        recentSearchFrame,
+                                        recyclerResultsView,
+                                        noConnectionError,
+                                        noResultsError,
+                                        false,
+                                        false,
+                                        false,
+                                        true
+                                    )
                                 }
                             } else {
                                 Log.d("MyTag", "IF3 else. Null results. Display noResultsError")
-                                setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, false, true)
+                                setLayoutVisibility(
+                                    recentSearchFrame,
+                                    recyclerResultsView,
+                                    noConnectionError,
+                                    noResultsError,
+                                    false,
+                                    false,
+                                    false,
+                                    true
+                                )
                             }
-                            adapter.notifyDataSetChanged()
+
                         } else {
                             Log.d("MyTag", "IF2 else. Code!=200. Display noConnectionError")
-                            setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
+                            setLayoutVisibility(
+                                recentSearchFrame,
+                                recyclerResultsView,
+                                noConnectionError,
+                                noResultsError,
+                                false,
+                                false,
+                                true,
+                                false
+                            )
                         }
                     } else {
                         Log.d("MyTag", "IF1 else. Unsuccessful response. Display noConnectionError")
-                        setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
+                        setLayoutVisibility(
+                            recentSearchFrame,
+                            recyclerResultsView,
+                            noConnectionError,
+                            noResultsError,
+                            false,
+                            false,
+                            true,
+                            false
+                        )
                     }
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     Log.d("MyTag", "onFailure. Display noConnectionError")
-                    setLayoutVisibility(searchRecycler, noConnectionError, noResultsError, false, true, false)
+                    setLayoutVisibility(
+                        recentSearchFrame,
+                        recyclerResultsView,
+                        noConnectionError,
+                        noResultsError,
+                        false,
+                        false,
+                        true,
+                        false
+                    )
                 }
             })
         }
 
+        clearSearchHistory.setOnClickListener {
+            SearchHistory.recentTracksList.clear()
+            SearchHistory(App.recentTracksSharedPreferences).encodeAndSave()
+            recentAdapter.notifyDataSetChanged()
+            setLayoutVisibility(
+                recentSearchFrame,
+                recyclerResultsView,
+                noConnectionError,
+                noResultsError,
+                false,
+                false,
+                false,
+                false
+            )
+        }
 
         searchBarField.doOnTextChanged { text, start, before, count ->
             if (text?.isNotEmpty() == true) {
@@ -166,16 +287,30 @@ class SearchActivity : AppCompatActivity() {
             userInputReserve = text.toString()
         }
 
+
+
         searchBarClear.setOnClickListener {
+            Log.d("MyTag", "search input clear fires")
             searchBarField.text.clear()
+
+            setLayoutVisibility(
+                recentSearchFrame,
+                recyclerResultsView,
+                noConnectionError,
+                noResultsError,
+                false,
+                false,
+                false,
+                false
+            )
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(searchBarField.windowToken, 0)
         }
 
-        val backButton = findViewById<ImageButton>(R.id.back_button)
+
+        val backButton = findViewById<ImageButton>(R.id.backButton)
 
         backButton.setOnClickListener {
-
             finish()
         }
 
@@ -189,6 +324,7 @@ class SearchActivity : AppCompatActivity() {
 
 
         }
+
         searchRefresh.setOnClickListener {
             handleSearch()
         }
@@ -196,4 +332,4 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    }
+}

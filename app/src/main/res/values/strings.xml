@@ -1,31 +1,34 @@
 <resources>
-    <!--Buttons -->
+    <!--Main & universal -->
     <string name="app_name">Playlist Maker</string>
     <string name="search">Поиск</string>
     <string name="library">Медиатека</string>
     <string name="settings">Настройки</string>
+
+    <string name="back">Назад</string>
+
+    <!-- Settings -->
     <string name="settings_darkmode">Темная тема</string>
     <string name="settings_share">Поделиться приложением</string>
     <string name="settings_support">Написать в поддержку</string>
     <string name="settings_EULA">Пользовательское соглашение</string>
-    <string name="back">Назад</string>
 
-    <!--Settings placeholders -->
+    <!-- Settings Placeholders-->
     <string name="share_link">https://practicum.yandex.ru/profile/android-developer/</string>
     <string name="email_recipient">"shoulddoisuppose@gmail.com"</string>
     <string name="email_subject">"Сообщение разработчикам и разработчицам приложения Playlist Maker"</string>
     <string name="email_message">"Спасибо разработчикам и разработчицам за крутое приложение!"</string>
     <string name="EULA_link">https://yandex.ru/legal/practicum_offer/</string>
+
+    <!--Search -->
     <string name="no_results">Ничего не нашлось</string>
     <string name="connection_error">Проблемы со связью\n\n
-    Загрузка не удалась. Проверьте"\nподключение к интернету</string>
+    Загрузка не удалась. Проверьте\nподключение к интернету</string>
     <string name="search_refresh">Обновить</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="previously_searched">Вы искали</string>
+    <string name="clear_recent">Очистить историю</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

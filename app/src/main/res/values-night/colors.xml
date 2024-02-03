@@ -8,9 +8,12 @@
     <color name="search_bar_bg">#FFFFFF</color>
     <color name="search_item_title">#FFFFFF</color>
     <color name="search_item_etc">#FFFFFF</color>
-    <color name="search_refresh_text">#1A1B22</color>
-    <color name="search_refresh_bg">#FFFFFF</color>
+    <color name="search_inverted_button_text">#1A1B22</color>
+    <color name="search_inverted_button_bg">#FFFFFF</color>
     <color name="search_note">#FFFFFF</color>
+    <color name="settings_toggle_pip">#3772E7</color>
+    <color name="settings_toggle_slider">#9FBBF3</color>
+
 
 
 </resources>
