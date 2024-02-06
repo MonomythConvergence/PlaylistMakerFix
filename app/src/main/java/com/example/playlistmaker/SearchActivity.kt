@@ -297,25 +297,14 @@ class SearchActivity : AppCompatActivity() {
                     false,
                     false
                 )
+                recentAdapter.notifyDataSetChanged()
             }
         }
 
 
 
         searchBarClear.setOnClickListener {
-            Log.d("MyTag", "search input clear fires")
             searchBarField.text.clear()
-
-            setLayoutVisibility(
-                recentSearchFrame,
-                recyclerResultsView,
-                noConnectionError,
-                noResultsError,
-                true,
-                false,
-                false,
-                false
-            )
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(searchBarField.windowToken, 0)
         }
