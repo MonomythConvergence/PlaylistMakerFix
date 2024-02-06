@@ -10,8 +10,9 @@ class SearchHistory(private val preferences: SharedPreferences) {
         var recentTracksList = arrayListOf<Track>()
     }
     fun addTrackToRecent(newTrack: Track) {
-        if (recentTracksList.none { it.trackId == newTrack.trackId }) {
+        val existingTrack = recentTracksList.find { it.trackId == newTrack.trackId }
 
+        if (existingTrack == null) {
             if (recentTracksList.size < 10) {
                 recentTracksList.add(0, newTrack)
                 encodeAndSave()
@@ -20,14 +21,14 @@ class SearchHistory(private val preferences: SharedPreferences) {
                 recentTracksList.add(0, newTrack)
                 encodeAndSave()
             }
-        }
-
-        else {
-            recentTracksList.remove(newTrack)
+        } else {
+            recentTracksList.remove(existingTrack)
             recentTracksList.add(0, newTrack)
             encodeAndSave()
+
         }
     }
+
     fun encodeAndSave() {
         val tracks = recentTracksList
         val gson = Gson()

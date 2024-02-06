@@ -92,8 +92,8 @@ class SearchActivity : AppCompatActivity() {
                 if (isNoConnectionErrorVisible) View.VISIBLE else View.GONE
             noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE}
 
-
         searchBarField.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {Log.d("MyTag", "focused")}
             if (hasFocus && searchBarField.text.isEmpty() && SearchHistory.recentTracksList.isNotEmpty()) {
                 SearchHistory(App.recentTracksSharedPreferences).decodeAndLoad()
                 setLayoutVisibility(
@@ -110,6 +110,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
         }
+        //searchBarField.requestFocus() Не удаляю т.к. критерий сдачи не понятен см. комментарий
 
 
         fun handleSearch() {
@@ -285,6 +286,18 @@ class SearchActivity : AppCompatActivity() {
                 searchBarClear.visibility = View.INVISIBLE
             }
             userInputReserve = text.toString()
+            if (text?.isEmpty() == true){
+                setLayoutVisibility(
+                    recentSearchFrame,
+                    recyclerResultsView,
+                    noConnectionError,
+                    noResultsError,
+                    true,
+                    false,
+                    false,
+                    false
+                )
+            }
         }
 
 
@@ -298,7 +311,7 @@ class SearchActivity : AppCompatActivity() {
                 recyclerResultsView,
                 noConnectionError,
                 noResultsError,
-                false,
+                true,
                 false,
                 false,
                 false

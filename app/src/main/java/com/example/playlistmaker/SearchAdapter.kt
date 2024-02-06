@@ -18,16 +18,19 @@ class SearchAdapter(diplayedList : ArrayList<Track>) : RecyclerView.Adapter<Sear
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_search_result_item, parent, false)
-
-        return TrackViewHolder(view)
+        val holder=TrackViewHolder(view)
+        holder.itemView.setOnClickListener {
+            val position = holder.absoluteAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val track = list[position]
+            SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
+        }}
+        return holder
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         val track = list[position]
         holder.bind(track)
-        holder.itemView.setOnClickListener {
-            SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
-        }
     }
 
     override fun getItemCount(): Int = list.size
