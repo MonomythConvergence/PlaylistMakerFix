@@ -16,8 +16,8 @@ class App : Application() {
         super.onCreate()
 
         themeSharedPreferences = getSharedPreferences(Constants.THEME_PREF_KEY, MODE_PRIVATE)
-        switchTheme(darkTheme)
         darkTheme=themeSharedPreferences.getBoolean(Constants.THEME_PREF_KEY, false)
+        switchTheme(darkTheme)
 
         recentTracksSharedPreferences = getSharedPreferences(Constants.RECENT_TRACKS_KEY, MODE_PRIVATE)
         SearchHistory(recentTracksSharedPreferences).decodeAndLoad()

@@ -5,28 +5,28 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+
 class SearchHistory(private val preferences: SharedPreferences) {
-    companion object {
-        var recentTracksList = arrayListOf<Track>()
-    }
+
     fun addTrackToRecent(newTrack: Track) {
         val existingTrack = recentTracksList.find { it.trackId == newTrack.trackId }
 
         if (existingTrack == null) {
             if (recentTracksList.size < 10) {
                 recentTracksList.add(0, newTrack)
-                encodeAndSave()
             } else {
-                recentTracksList.removeAt(9)
+                while (recentTracksList.size>9){
+                    recentTracksList.removeAt(recentTracksList.size-1)
+                }
                 recentTracksList.add(0, newTrack)
-                encodeAndSave()
             }
-        } else {
+        }
+        if (existingTrack != null) {
             recentTracksList.remove(existingTrack)
             recentTracksList.add(0, newTrack)
-            encodeAndSave()
-
         }
+        encodeAndSave()
+        SearchActivity.recentAdapter.notifyDataSetChanged()
     }
 
     fun encodeAndSave() {
@@ -47,6 +47,7 @@ class SearchHistory(private val preferences: SharedPreferences) {
             val tracks = Gson().fromJson<ArrayList<Track>>(jsonString, type)
             recentTracksList = tracks
         }
+
     }
 }
 

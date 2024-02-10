@@ -11,20 +11,23 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import java.util.ArrayList
 
-class SearchAdapter(diplayedList : ArrayList<Track>) : RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
+class SearchAdapter(diplayedList: ArrayList<Track>) :
 
+
+    RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
     val list = diplayedList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_search_result_item, parent, false)
-        val holder=TrackViewHolder(view)
+        val holder = TrackViewHolder(view)
         holder.itemView.setOnClickListener {
             val position = holder.absoluteAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val track = list[position]
-            SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
-        }}
+                SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
+            }
+        }
         return holder
     }
 
@@ -52,5 +55,6 @@ class SearchAdapter(diplayedList : ArrayList<Track>) : RecyclerView.Adapter<Sear
                 .into(artworkImageView)
         }
     }
+
 }
 

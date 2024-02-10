@@ -29,11 +29,11 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var recyclerResultsView: RecyclerView
     private lateinit var recyclerRecentView: RecyclerView
     private lateinit var searchAdapter: SearchAdapter
-    private lateinit var recentAdapter: SearchAdapter
 
 
     companion object {
         private const val USER_INPUT = "userInput"
+        var recentAdapter = SearchAdapter(arrayListOf<Track>())
     }
 
 
@@ -51,15 +51,17 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+
         recyclerResultsView = findViewById(R.id.searchResultsRecycler)
-        searchAdapter = SearchAdapter(Track.trackList)
+        searchAdapter = SearchAdapter(trackList)
         recyclerResultsView.adapter = searchAdapter
         recyclerResultsView.layoutManager = LinearLayoutManager(this)
 
         recyclerRecentView = findViewById(R.id.recentRecycler)
-        recentAdapter = SearchAdapter(SearchHistory.recentTracksList)
+        recentAdapter = SearchAdapter(recentTracksList)
         recyclerRecentView.adapter = recentAdapter
         recyclerRecentView.layoutManager = LinearLayoutManager(this)
+
 
         val searchBarField = findViewById<EditText>(R.id.searchBarField)
         val searchBarClear = findViewById<ImageButton>(R.id.searchBarClear)
@@ -70,6 +72,7 @@ class SearchActivity : AppCompatActivity() {
 
         val recentSearchFrame = findViewById<LinearLayout>(R.id.recentSearchFrame)
         val clearSearchHistory = findViewById<Button>(R.id.clearSearchHistory)
+
 
 
         if (savedInstanceState != null) {
@@ -90,12 +93,11 @@ class SearchActivity : AppCompatActivity() {
             searchRecycler.visibility = if (isSearchVisible) View.VISIBLE else View.GONE
             noConnectionError.visibility =
                 if (isNoConnectionErrorVisible) View.VISIBLE else View.GONE
-            noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE}
+            noResultsError.visibility = if (isNoResultsErrorVisible) View.VISIBLE else View.GONE
+        }
 
         searchBarField.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {Log.d("MyTag", "focused")}
-            if (hasFocus && searchBarField.text.isEmpty() && SearchHistory.recentTracksList.isNotEmpty()) {
-                SearchHistory(App.recentTracksSharedPreferences).decodeAndLoad()
+            if (hasFocus && searchBarField.text.isEmpty() && recentTracksList.isNotEmpty()) {
                 setLayoutVisibility(
                     recentSearchFrame,
                     recyclerResultsView,
@@ -110,7 +112,6 @@ class SearchActivity : AppCompatActivity() {
             }
 
         }
-        //searchBarField.requestFocus() Не удаляю т.к. критерий сдачи не понятен см. комментарий
 
 
         fun handleSearch() {
@@ -130,7 +131,7 @@ class SearchActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            Track.trackList.clear()
+                            trackList.clear()
 
                             if (response.body() != null) {
                                 val parsedResponse = gson.fromJson(
@@ -158,7 +159,7 @@ class SearchActivity : AppCompatActivity() {
                                     } else {
                                         for (result in searchResults) {
 
-                                            Track.trackList.add(
+                                            trackList.add(
                                                 Track(
                                                     result.trackName,
                                                     result.artistName,
@@ -264,9 +265,8 @@ class SearchActivity : AppCompatActivity() {
         }
 
         clearSearchHistory.setOnClickListener {
-            SearchHistory.recentTracksList.clear()
+            recentTracksList.clear()
             SearchHistory(App.recentTracksSharedPreferences).encodeAndSave()
-            recentAdapter.notifyDataSetChanged()
             setLayoutVisibility(
                 recentSearchFrame,
                 recyclerResultsView,
@@ -277,6 +277,7 @@ class SearchActivity : AppCompatActivity() {
                 false,
                 false
             )
+            recentAdapter.notifyDataSetChanged()
         }
 
         searchBarField.doOnTextChanged { text, start, before, count ->
@@ -284,22 +285,37 @@ class SearchActivity : AppCompatActivity() {
                 searchBarClear.visibility = View.VISIBLE
             } else {
                 searchBarClear.visibility = View.INVISIBLE
+                if (recentTracksList.isNotEmpty()){
+                    setLayoutVisibility(
+                        recentSearchFrame,
+                        recyclerResultsView,
+                        noConnectionError,
+                        noResultsError,
+                        true,
+                        false,
+                        false,
+                        false
+                    )
+                }
+                if (recentTracksList.isEmpty()){
+                    setLayoutVisibility(
+                        recentSearchFrame,
+                        recyclerResultsView,
+                        noConnectionError,
+                        noResultsError,
+                        false,
+                        false,
+                        false,
+                        false
+                    )
+                }
+
             }
             userInputReserve = text.toString()
-            if (text?.isEmpty() == true){
-                setLayoutVisibility(
-                    recentSearchFrame,
-                    recyclerResultsView,
-                    noConnectionError,
-                    noResultsError,
-                    true,
-                    false,
-                    false,
-                    false
-                )
-                recentAdapter.notifyDataSetChanged()
-            }
         }
+
+
+        searchBarField.requestFocus()
 
 
 
