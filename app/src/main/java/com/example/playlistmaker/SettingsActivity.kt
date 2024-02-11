@@ -5,17 +5,25 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val backButton = findViewById<ImageButton>(R.id.back_button)
+
+        val backButton = findViewById<ImageButton>(R.id.backButton)
 
         backButton.setOnClickListener {
 
             finish()
+        }
+
+        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher)
+        themeSwitcher.isChecked = (App.darkTheme)
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
         }
 
         val shareButton = findViewById<ImageButton>(R.id.settings_share_button)
@@ -39,16 +47,15 @@ class SettingsActivity : AppCompatActivity() {
         supportButton.setOnClickListener {
 
 
-
             val sendIntent = Intent(Intent.ACTION_SENDTO)
-                sendIntent.data = Uri.parse("mailto:")
-                sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.email_recipient)))
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_message))
-                startActivity(sendIntent)
+            sendIntent.data = Uri.parse("mailto:")
+            sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.email_recipient)))
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
+            sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_message))
+            startActivity(sendIntent)
 
 
-    }
+        }
         val EULAButton = findViewById<ImageButton>(R.id.EULA_button)
 
         EULAButton.setOnClickListener {
@@ -57,4 +64,5 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
             startActivity(intent)
         }
-}}
+    }
+}

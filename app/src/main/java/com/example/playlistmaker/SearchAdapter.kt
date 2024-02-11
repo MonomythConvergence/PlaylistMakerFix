@@ -9,21 +9,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.util.ArrayList
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
+class SearchAdapter(diplayedList: ArrayList<Track>) :
+
+
+    RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
+    val list = diplayedList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_search_result_item, parent, false)
-        return TrackViewHolder(view)
+        val holder = TrackViewHolder(view)
+        holder.itemView.setOnClickListener {
+            val position = holder.absoluteAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val track = list[position]
+                SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
+            }
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        val track = Track.trackList[position]
+        val track = list[position]
         holder.bind(track)
     }
 
-    override fun getItemCount(): Int = Track.trackList.size
+    override fun getItemCount(): Int = list.size
 
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val trackName: TextView = itemView.findViewById(R.id.track_name)
@@ -38,7 +51,10 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
             Glide.with(artworkImageView)
                 .load(track.artworkUrl100)
                 .placeholder(R.drawable.placeholder)
-                .transform(CenterCrop(), RoundedCorners(R.dimen.Track_icon_rounding)).into(artworkImageView)
+                .transform(CenterCrop(), RoundedCorners(R.dimen.Track_icon_rounding))
+                .into(artworkImageView)
         }
     }
+
 }
+

@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/icon_bg"
@@ -92,12 +92,63 @@
 
     </FrameLayout>
 
-    <!-- Results -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRecycler"
+    <!-- Recently searched -->
+    <LinearLayout
+        android:id="@+id/recentSearchFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible" />
+        android:paddingTop="24dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="12dp"
+            android:fontFamily="@font/ys_text_medium"
+            android:gravity="center"
+            android:text="@string/previously_searched"
+            android:textColor="@color/search_note"
+            android:textSize="19sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recentRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingBottom="24dp" />
+        <Button
+
+            android:id="@+id/clearSearchHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/search_inverted_button_bg"
+            android:fontFamily="@font/ys_text_medium"
+            android:paddingVertical="6dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
+            android:text="@string/clear_recent"
+            android:textColor="@color/search_inverted_button_text"
+            android:textSize="14sp"
+            app:cornerRadius="@dimen/Search_inverted_button_rounding"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </LinearLayout>
+
+    <!-- Results -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResultsRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingBottom="24dp"
+        android:visibility="gone" />
 
     <!-- No connection -->
     <LinearLayout
@@ -111,9 +162,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/compound_no_internet"
+            android:paddingHorizontal="120dp"
             android:paddingTop="102dp"
-            android:paddingHorizontal="120dp"/>
+            android:src="@drawable/compound_no_internet" />
 
         <TextView
             android:layout_width="match_parent"
@@ -131,14 +182,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/search_refresh_bg"
+            android:backgroundTint="@color/search_inverted_button_bg"
 
             android:fontFamily="@font/ys_text_medium"
-            android:paddingTop="8dp"
+            android:paddingVertical="6dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
             android:text="@string/search_refresh"
-            android:textColor="@color/search_refresh_text"
+            android:textColor="@color/search_inverted_button_text"
             android:textSize="14sp"
-            app:cornerRadius="@dimen/Search_bar_rounding"
+            app:cornerRadius="@dimen/Search_inverted_button_rounding"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
@@ -153,9 +206,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/compound_no_results"
+            android:paddingHorizontal="120dp"
             android:paddingTop="102dp"
-            android:paddingHorizontal="120dp"/>
+            android:src="@drawable/compound_no_results" />
 
         <TextView
             android:layout_width="match_parent"
