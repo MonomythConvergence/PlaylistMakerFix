@@ -77,4 +77,24 @@
         <item name="android:textColor">@color/search_item_etc</item>
     </style>
 
+    <style name="PlayerDataFields">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textColor">@color/player_secondary_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/ys_text_regular</item>
+    </style>
+    <style name="PlayerTrackData">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/player_main_text</item>
+        <item name="android:text">placeholder</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/ys_text_regular</item>
+    </style>
+
 </resources>

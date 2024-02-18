@@ -1,5 +1,6 @@
 package com.example.playlistmaker
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import java.util.ArrayList
 
-class SearchAdapter(diplayedList: ArrayList<Track>) :
+class SearchAdapter(diplayedList: ArrayList<Track>, activity: SearchActivity) :
 
 
     RecyclerView.Adapter<SearchAdapter.TrackViewHolder>() {
     val list = diplayedList
+    val activityInstance = activity
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,10 +25,13 @@ class SearchAdapter(diplayedList: ArrayList<Track>) :
         val holder = TrackViewHolder(view)
         holder.itemView.setOnClickListener {
             val position = holder.absoluteAdapterPosition
+            val playerIntent = Intent(activityInstance, PlayerActivity::class.java)
+            playerIntent.putExtra("selectedTrack", list[position])
             if (position != RecyclerView.NO_POSITION) {
                 val track = list[position]
                 SearchHistory(App.recentTracksSharedPreferences).addTrackToRecent(track)
             }
+            activityInstance.startActivity(playerIntent)
         }
         return holder
     }

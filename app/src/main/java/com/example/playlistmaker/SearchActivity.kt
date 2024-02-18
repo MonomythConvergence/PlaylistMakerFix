@@ -33,9 +33,8 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         private const val USER_INPUT = "userInput"
-        var recentAdapter = SearchAdapter(arrayListOf<Track>())
+        var recentAdapter = SearchAdapter(arrayListOf<Track>(), SearchActivity())
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -51,14 +50,15 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        val activity = this
 
         recyclerResultsView = findViewById(R.id.searchResultsRecycler)
-        searchAdapter = SearchAdapter(trackList)
+        searchAdapter = SearchAdapter(trackList,activity)
         recyclerResultsView.adapter = searchAdapter
         recyclerResultsView.layoutManager = LinearLayoutManager(this)
 
         recyclerRecentView = findViewById(R.id.recentRecycler)
-        recentAdapter = SearchAdapter(recentTracksList)
+        recentAdapter = SearchAdapter(recentTracksList,activity)
         recyclerRecentView.adapter = recentAdapter
         recyclerRecentView.layoutManager = LinearLayoutManager(this)
 
@@ -170,7 +170,11 @@ class SearchActivity : AppCompatActivity() {
                                                         result.trackTimeMillis
                                                     ),
                                                     result.artworkUrl100,
-                                                    result.trackId
+                                                    result.trackId,
+                                                    result.collectionName,
+                                                    result.releaseDate.substring(0,4),
+                                                    result.primaryGenreName,
+                                                    result.country
                                                 )
                                             )
 

@@ -2,8 +2,12 @@
 <resources>
     <color name="main_screen_bg">#1A1B22</color>
     <color name="icon_bg">#1A1B22</color>
+
     <color name="settings_font">#FFFFFFFF</color>
     <color name="settings_button">#FFFFFF</color>
+    <color name="settings_toggle_pip">#3772E7</color>
+    <color name="settings_toggle_slider">#9FBBF3</color>
+
     <color name="search_bar_elements">#1A1B22</color>
     <color name="search_bar_bg">#FFFFFF</color>
     <color name="search_item_title">#FFFFFF</color>
@@ -11,8 +15,12 @@
     <color name="search_inverted_button_text">#1A1B22</color>
     <color name="search_inverted_button_bg">#FFFFFF</color>
     <color name="search_note">#FFFFFF</color>
-    <color name="settings_toggle_pip">#3772E7</color>
-    <color name="settings_toggle_slider">#9FBBF3</color>
+
+    <color name="player_bg">#FFFFFF</color>
+    <color name="player_main_text">#FFFFFF</color>
+    <color name="player_secondary_text">#AEAFB4</color>
+    <color name="player_main_button">#FFFFFF</color>
+    <color name="player_secondary_button">#FFFFFF</color>
 
 
 

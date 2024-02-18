@@ -4,6 +4,7 @@
     <dimen name="Main_icon_padding">8dp</dimen>
     <dimen name="Search_bar_rounding">8dp</dimen>
     <dimen name="Search_refresh_rounding">8dp</dimen>
+    <dimen name="Artwork_rounding">8dp</dimen>
     <dimen name="Track_icon_rounding">2dp</dimen>
     <dimen name="Search_inverted_button_rounding">54dp</dimen>
 </resources>
