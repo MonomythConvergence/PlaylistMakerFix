@@ -16,6 +16,7 @@
     <color name="search_inverted_button_text">#FFFFFF</color>
     <color name="search_inverted_button_bg">#1A1B22</color>
     <color name="search_note">#1A1B22</color>
+    <color name="search_progress_bar">#3772E7</color>
 
     <color name="player_bg">#FFFFFF</color>
     <color name="player_main_text">#1A1B22</color>
@@ -24,7 +25,6 @@
     <color name="player_secondary_button">#1A1B22</color>
     <color name="player_button_red">#F56B6C</color>
     <color name="player_secondary_button_inner">#FFFFFF</color>
-
 
 
     <color name="black">#1A1B22</color>
